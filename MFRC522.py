@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+import pyA20.gpio as GPIO
 import spi
 import signal
   
@@ -105,9 +105,9 @@ class MFRC522:
   
   def __init__(self,spd=1000000):
     spi.openSPI(speed=spd)
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(22, GPIO.OUT)
-    GPIO.output(self.NRSTPD, 1)
+    #GPIO.setmode(GPIO.BOARD)
+    #GPIO.setup(22, GPIO.OUT)
+    #GPIO.output(self.NRSTPD, 1)
     self.MFRC522_Init()
   
   def MFRC522_Reset(self):
@@ -353,7 +353,7 @@ class MFRC522:
   
   
   def MFRC522_Init(self):
-    GPIO.output(self.NRSTPD, 1)
+    #GPIO.output(self.NRSTPD, 1)
   
     self.MFRC522_Reset();
     
