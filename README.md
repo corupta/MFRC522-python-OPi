@@ -5,6 +5,8 @@ I ported the original library for my use-case:
 * I did NOT need to implement any read/write for remaining sectors
 * I refer to [https://www.nxp.com/docs/en/application-note/AN10927.pdf](https://www.nxp.com/docs/en/application-note/AN10927.pdf) and ISO/IEC 14443 UIDs
 
+PS: Reset pin of MFRC522 is connected to PA10 of my oPi Zero (hence NRSTPD=26) (but this lib can work without using it, as well)
+
 - [x] Modified the library to make it work on python3
 - [x] Replaced old spi with spidev
 - [x] Implemented support for reading 4/7/10byte uid
@@ -15,6 +17,8 @@ I ported the original library for my use-case:
 - [ ] Test reading 4 byte RID
 
 #### MFRC522 Python3 Library for Orange Pi
+* Make sure /dev/spidev1.0 is available before use
+
   * Preparation
   ```
   $ sudo apt-get install python3 python3-dev python3-pip
