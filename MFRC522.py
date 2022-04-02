@@ -278,7 +278,7 @@ class MFRC522:
   def MFRC522_SelectTag(self, serNum, cascade_level=1):
     backData = []
     buf = []
-    buf.append(sel.PICC_SElECTTAG[cascade_level])
+    buf.append(self.PICC_SElECTTAG[cascade_level])
     buf.append(0x70)
     i = 0
     while i<5:
