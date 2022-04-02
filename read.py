@@ -86,5 +86,6 @@ while continue_reading:
   json_res = "{}\n".format(json.dumps({ 'uid': uid, 'cardInfo': card_info }))
 
   sys.stdout.write(json_res)
-  # stay idle for 1 second after reading a card
-  time.sleep(1)
+  # stay idle for 4 second after reading a card
+  time.sleep(4)
+  # TODO maybe instead prevent printing whilst same card present, if removed allow new scan.
