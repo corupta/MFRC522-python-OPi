@@ -10,6 +10,8 @@ debug_enabled = False
 if len(sys.argv) >= 2 and str(sys.argv[1]) == '--debug':
   debug_enabled = True
 
+last_card_uid_str = None
+same_card_shake_limit = 0
 continue_reading = True
 MIFAREReader = MFRC522.MFRC522()
 
@@ -79,13 +81,32 @@ while continue_reading:
   res = read_uid()
 
   if res is None:
+    if last_card_uid_str is None:
+        continue
+    # card is being pulled away or just shaky?
+    if same_card_shake_limit > 0:
+        # assume shaky
+        same_card_shake_limit -= 1
+        continue
+    # assume the card is gone
+    last_card_uid_str = None
     continue
 
   (uid, card_info) = res
+  uidStr = ''.join(['{:02x}'.format(b) for b in uid])
 
-  json_res = "{}\n".format(json.dumps({ 'uid': uid, 'cardInfo': card_info }))
+  same_card_shake_limit = 6 # reset shake limit
+
+  if last_card_uid_str == uidStr:
+    # same card read again, ignore.
+    debug_print('same card, {} is read'.format(uidStr))
+    time.sleep(0.1)
+    continue
+
+  last_card_uid_str = uidStr
+
+  json_res = "{}\n".format(json.dumps({ 'uidStr': uidStr, 'uid': uid, 'cardInfo': card_info }))
 
   sys.stdout.write(json_res)
-  # stay idle for 4 second after reading a card
-  time.sleep(4)
-  # TODO maybe instead prevent printing whilst same card present, if removed allow new scan.
+  # stay idle for 0.5 second after reading a new card
+  time.sleep(0.5)

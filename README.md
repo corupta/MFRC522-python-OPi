@@ -11,10 +11,11 @@ PS: Reset pin of MFRC522 is connected to PA10 of my oPi Zero (hence NRSTPD=26) (
 - [x] Replaced old spi with spidev
 - [x] Implemented support for reading 4/7/10byte uid
 - [x] Implement adding some metadata about uid
-- [ ] Test reading 4 byte UID
-- [ ] Test reading 7 byte UID
+- [X] Test reading 4 byte UID
+- [X] Test reading 7 byte UID
 - [ ] Test reading 10 byte UID (Cannot test, I don't have such a card)
-- [ ] Test reading 4 byte RID
+- [X] Test reading 4 byte RID
+- [X] Improve read-feel (don't read same card when it is still kept in touch)
 
 #### MFRC522 Python3 Library for Orange Pi
 * Make sure /dev/spidev1.0 is available before use
